@@ -18,12 +18,17 @@ class Panda(object):
         print 'hi'
 
 #test Func
-def eatAfile(fileLoc):
+def eatAfile(fileLoc, urlFilter='^/$|(/wordpress/)|(^\?p=)'):
     data = CommonConfParser.readConfInList(fileLoc, "\s")
     #dataSet = {}
+    reFlt = re.compile(urlFilter)
     for each in data:
         ret = ana(each)
-        print ret
+        if reFlt.match(ret['uri']):
+            locStr = askIp.locationDict2TidyStr(ret['ipLocation']).encode('utf8')
+            print locStr, ret['uri']
+        else:
+            pass
          
         
 #test Func
@@ -57,6 +62,7 @@ def logInit():
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print "%s logName" % (sys.argv[0])
+        sys.exit(0)
     #p = Panda(sys.argv[0])
     #p.run()
     eatAfile(sys.argv[1])
