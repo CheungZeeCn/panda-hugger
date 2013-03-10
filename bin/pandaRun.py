@@ -26,7 +26,7 @@ def eatAfile(fileLoc, urlFilter='^/$|(/wordpress/)|(^\?p=)'):
         ret = ana(each)
         if reFlt.match(ret['uri']):
             locStr = askIp.locationDict2TidyStr(ret['ipLocation']).encode('utf8')
-            print locStr, ret['timeStr'], ret['uri']
+            print locStr, ret['timeStr'], ret['ua'], ret['uri']
         else:
             pass
          
