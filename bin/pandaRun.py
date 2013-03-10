@@ -18,7 +18,7 @@ class Panda(object):
         print 'hi'
 
 #test Func
-def eatAfile(fileLoc, urlFilter='^/$|(/wordpress/)|(^\?p=)'):
+def eatAfile(fileLoc, urlFilter='^/$|(^/wordpress/$)|(^\?p=)'):
     data = CommonConfParser.readConfInList(fileLoc, "\s")
     #dataSet = {}
     reFlt = re.compile(urlFilter)
@@ -48,8 +48,8 @@ def ana(line):
     cIp = line[0]
     timeStr = line[3]
     uri = line[6]
-    ref = line[9]
-    ua = line[10]
+    ref = line[10]
+    ua = "|".join(line[11:])
     ipLocation = askIp.askIpLocation(cIp)
     return {'cIp':cIp, 'ipLocation':ipLocation, 'timeStr':timeStr, \
             'uri':uri, 'ref':ref, 'ua':ua}
